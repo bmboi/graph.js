@@ -1,0 +1,100 @@
+<!--example, you dont need this in your code. -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graph Renderer</title>
+  <style>
+    canvas{
+      outline: black 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <h1>Graph.js Example</h1>
+  <canvas id="bar" width="400" height="300"></canvas>
+  <canvas id="line" width="400" height="300"></canvas>
+  <canvas id="pie" width="400" height="300"></canvas>
+  <canvas id="scatterPlotCanvas" width="400" height="300"></canvas>
+  <canvas id="areaChartCanvas" width="400" height="300"></canvas>
+  <hr>
+  <script src="graph.js"></script>
+  <script>
+    var barGraphData = [10, 20, 30, 40, 50,30,50,12,35];
+    GraphRenderer.BarGraph("bar", barGraphData);
+
+    var lineGraphData = [20, 40, 25, 35, 50];
+    GraphRenderer.LineGraph("line", lineGraphData, "#feefe");
+
+    var pieChartData = [30, 40, 20, 10];
+    GraphRenderer.PieChart("pie", pieChartData);
+    
+    var scatterPlotData = [
+      { x: 0, y: 0},
+      { x: 10, y: 20 },
+      { x: 20, y: 30 },
+      { x: 30, y: 40 },
+      { x: 40, y: 50 },
+      { x: 50, y: 60 }
+    ];
+    GraphRenderer.ScatterPlot("scatterPlotCanvas", scatterPlotData);
+
+    var areaChartData = [10, 30, 20, 40, 30, 50];
+    GraphRenderer.AreaChart("areaChartCanvas", areaChartData);
+  </script>
+  <h2>Custom Graph</h2>
+  <div>
+    <label for="dataInput">Data Values:</label>
+    <input type="text" id="dataInput" placeholder="Enter data values">
+  </div>
+  <div>
+    <label for="graphType">Graph Type:</label>
+    <select id="graphType">
+      <option value="bar">Bar Graph</option>
+      <option value="line">Line Graph</option>
+      <option value="pie">Pie Chart</option>
+      <option value="area">Area Chart</option>
+      <option value="scatter">Scatter plot</option>
+    </select>
+  </div>
+  <div>
+    <button onclick="renderCustomGraph()">Render Graph</button>
+  </div>
+  <canvas id="custom" width="400" height="300"></canvas>
+
+  <script src="graph.js"></script>
+  <script>
+    function renderCustomGraph() {
+      var dataInput = document.getElementById("dataInput");
+      var graphType = document.getElementById("graphType");
+
+      var data = dataInput.value.split(",").map(function(value) {
+        return parseFloat(value.trim());
+      });
+
+      var canvasId = "custom";
+      var selectedGraphType = graphType.value;
+
+      clearCanvas(canvasId);
+
+      if (selectedGraphType === "bar") {
+        GraphRenderer.BarGraph(canvasId, data);
+      } else if (selectedGraphType === "line") {
+        GraphRenderer.LineGraph(canvasId, data);
+      } else if (selectedGraphType === "pie") {
+        GraphRenderer.PieChart(canvasId, data);
+      } else if (selectedGraphType === "area") {
+        GraphRenderer.AreaChart(canvasId, data);
+      } else if (selectedGraphType === "scatter") {
+        GraphRenderer.ScatterPlot(canvasId, data);
+    }
+
+    function clearCanvas(canvasId) {
+      var canvas = document.getElementById(canvasId);
+      var context = canvas.getContext("2d");
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
+</body>
+</html>
