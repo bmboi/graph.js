@@ -1,4 +1,4 @@
-# graph.js
+# Graph.js
 
 
 Graph.js is a JavaScript Library that allows you to statically add data displays to your webpages. You can use the following:
@@ -10,10 +10,10 @@ Graph.js is a JavaScript Library that allows you to statically add data displays
 
 
 ### Usage
-The following are input examples: (JavaScript)</p>
+The following are examples for using graph.js:<p>
     <i>Bar graph, line graph, pie chart, area chart</i>
 
-  `js
+  `
   var data = [10, 20, 30, 40, 50, 30, 50, 12, 35];
     GraphRenderer.BarGraph("canvasID", data);
    `
